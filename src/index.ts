@@ -68,6 +68,10 @@ async function renameBinary(
 
 async function getVersion(): Promise<string> {
   const version = core.getInput('version');
+  if (version === 'latest' || version === 'edge') {
+    return version;
+  }
+
   if (semver.valid(version)) {
     return semver.clean(version) || version;
   }
